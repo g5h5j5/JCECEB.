@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>JCECEB College Predictor</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f0f4f8;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      min-height: 100vh;
+    }
+
+    header {
+      background-color: #005a9c;
+      width: 100%;
+      padding: 20px 0;
+      color: white;
+      text-align: center;
+    }
+
+    main {
+      padding: 30px 20px;
+      max-width: 600px;
+      width: 100%;
+    }
+
+    label, input, button {
+      display: block;
+      width: 100%;
+      margin-top: 10px;
+      font-size: 16px;
+    }
+
+    input {
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+    }
+
+    button {
+      padding: 12px;
+      background-color: #0077cc;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      margin-top: 15px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    button:hover {
+      background-color: #005fa3;
+    }
+
+    .result {
+      margin-top: 25px;
+      background: white;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .error {
+      color: red;
+      margin-top: 10px;
+    }
+
+    @media (max-width: 480px) {
+      input, button {
+        font-size: 14px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>JCECEB College Predictor</h1>
+  </header>
+
+  <main>
+    <label for="rank">Enter your JCECEB CRL Rank:</label>
+    <input type="number" id="rank" placeholder="e.g. 1200" />
+    <button onclick="predictCollege()">Predict College</button>
+    <div class="error" id="error"></div>
+    <div class="result" id="result"></div>
+  </main>
+
+  <script>
+    function predictCollege() {
+      const rankInput = document.getElementById("rank").value;
+      const rank = parseInt(rankInput);
+      const resultDiv = document.getElementById("result");
+      const errorDiv = document.getElementById("error");
+      let message = "";
+
+      errorDiv.textContent = ""; // Clear previous error
+
+      if (!rankInput || isNaN(rank) || rank <= 0) {
+        errorDiv.textContent = "Please enter a valid positive rank.";
+        resultDiv.innerHTML = "";
+        return;
+      }
+
+      if (rank <= 200) {
+        message = "Your Possible College is <strong>BIT Sindri</strong><br>Branch: CSE & IT";
+      } else if (rank <= 500) {
+        message = "Your Possible College is <strong>BIT Sindri</strong><br>Branch: Cyber Security & ECE";
+      } else if (rank <= 600) {
+        message = "Your Possible College is <strong>BIT Sindri</strong><br>Branch: ECE & EE";
+      } else if (rank <= 800) {
+        message = "Your Possible College is <strong>BIT Sindri</strong><br>Branch: MECH & METAL";
+      } else if (rank <= 1000) {
+        message = "Your Possible College is <strong>BIT Sindri</strong><br>Branch: METAL & CHEM";
+      } else if (rank <= 1200) {
+        message = "Your Possible College is <strong>BIT Sindri</strong><br>Branch: CHEM & CIVIL";
+      } else if (rank <= 1500) {
+        message = "Your Possible College is <strong>BIT Sindri</strong><br>Branch: CIVIL & PRODUCTION";
+      } else if (rank <= 1700) {
+        message = "Your Possible College is <strong>GEC Palamu</strong><br>Branch: CSE";
+      } else if (rank <= 2100) {
+        message = "Your Possible College is <strong>GEC Palamu</strong><br>Branch: EE";
+      } else if (rank <= 2700) {
+        message = "Your Possible College is <strong>GEC Palamu</strong><br>Branch: MECH";
+      } else if (rank <= 3200) {
+        message = "Your Possible College is <strong>GEC Palamu</strong><br>Branch: CIVIL";
+      } else {
+        message = "You may not be able to find a <strong>Government College in Jharkhand</strong>.<br>You may consider PPP colleges in Jharkhand.";
+      }
+
+      resultDiv.innerHTML = message;
+    }
+
+    // Enable Enter key to trigger prediction
+    document.getElementById("rank").addEventListener("keypress", function(event) {
+      if (event.key === "Enter") {
+        predictCollege();
+      }
+    });
+  </script>
+
+</body>
+</html>
